@@ -127,9 +127,11 @@ export function Pipeline() {
   const loadPipelines = async () => {
     try {
       const result = await listPipelines(cfg.apiBase, cfg.apiKey)
-      setPipelines(result.pipelines)
+      // Defensive programming: ensure pipelines is always an array
+      setPipelines(Array.isArray(result?.pipelines) ? result.pipelines : [])
     } catch (err) {
       console.error('Error loading pipelines:', err)
+      setPipelines([]) // Set empty array on error
     }
   }
 

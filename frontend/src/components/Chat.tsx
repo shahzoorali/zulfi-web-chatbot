@@ -24,10 +24,12 @@ export function Chat(){
         })
         if (response.ok) {
           const data = await response.json()
-          setAvailableRuns(data.pipelines || [])
+          // Defensive programming: ensure pipelines is always an array
+          const pipelines = Array.isArray(data?.pipelines) ? data.pipelines : []
+          setAvailableRuns(pipelines)
           // Auto-select the most recent run if available
-          if (data.pipelines && data.pipelines.length > 0) {
-            setSelectedRunId(data.pipelines[0])
+          if (pipelines.length > 0) {
+            setSelectedRunId(pipelines[0])
           }
         }
       } catch (err) {

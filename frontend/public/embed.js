@@ -2,7 +2,10 @@
   function h(t, attrs, children){
     var el = document.createElement(t);
     attrs = attrs || {}; children = children || [];
-    Object.keys(attrs).forEach(function(k){ if(el[k] !== undefined) el[k]=attrs[k]; else el.setAttribute(k, attrs[k]); });
+    // Defensive programming: ensure attrs is an object before using Object.keys
+    if (attrs && typeof attrs === 'object') {
+      Object.keys(attrs).forEach(function(k){ if(el[k] !== undefined) el[k]=attrs[k]; else el.setAttribute(k, attrs[k]); });
+    }
     (Array.isArray(children)?children:[children]).forEach(function(c){ if(typeof c === 'string') el.appendChild(document.createTextNode(c)); else if(c) el.appendChild(c); });
     return el;
   }

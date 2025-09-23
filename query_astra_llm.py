@@ -115,10 +115,14 @@ def extract_query_terms(q: str) -> List[str]:
 # ── Vector candidate search (no DB string operators) ───────────────
 def vector_candidate_search(query_text: str, top_k: int) -> List[Dict[str, Any]]:
     vec = embedder.encode(query_text).tolist()
+    # Read environment variables at runtime
+    site_name = os.getenv("SITE_NAME", "unknown_site")
+    run_id = os.getenv("RUN_ID")
+    
     # Only base filter by site/run; avoid unsupported $regex/$ilike
-    base_filter: Dict[str, Any] = {"site_name": {"$eq": SITE_NAME}}
-    if RUN_ID:
-        base_filter["run_id"] = {"$eq": RUN_ID}
+    base_filter: Dict[str, Any] = {"site_name": {"$eq": site_name}}
+    if run_id:
+        base_filter["run_id"] = {"$eq": run_id}
     find_kwargs = {
         "sort": {"$vector": vec},
         "limit": top_k,

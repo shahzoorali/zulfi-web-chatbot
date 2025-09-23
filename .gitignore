@@ -62,3 +62,6 @@ logs/
 
 # AWS
 .aws/
+
+# Pipeline data
+data/

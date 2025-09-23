@@ -1,0 +1,48 @@
+version: 1.0
+runtime: python3
+build:
+  commands:
+    build:
+      - echo "Installing dependencies..."
+      - python3 -m pip install --upgrade pip
+      - python3 -m pip install -r requirements.txt
+      - echo "Installing Playwright browsers..."
+      - python3 -m playwright install chromium
+      - echo "Build completed"
+run:
+  runtime-version: 3.11
+  command: python3 -m uvicorn server:app --host 0.0.0.0 --port 8000
+  network:
+    port: 8000
+  env:
+    - name: IBM_API_KEY
+      value: "${IBM_API_KEY}"
+    - name: WATSONX_PROJECT_ID
+      value: "${WATSONX_PROJECT_ID}"
+    - name: WATSONX_URL
+      value: "https://ca-tor.ml.cloud.ibm.com"
+    - name: WATSONX_MODEL_ID
+      value: "meta-llama/llama-3-3-70b-instruct"
+    - name: ASTRA_COLLECTION_NAME
+      value: "chatbot_chunks"
+    - name: ASTRA_KEYSPACE
+      value: "default_keyspace"
+    - name: EMBED_MODEL
+      value: "sentence-transformers/all-mpnet-base-v2"
+    - name: ASTRA_DEVOPS_TOKEN
+      value: "${ASTRA_DEVOPS_TOKEN}"
+    - name: ASTRA_REGION
+      value: "us-east-2"
+    - name: ASTRA_CLOUD
+      value: "AWS"
+    - name: ASTRA_TIER
+      value: "serverless"
+    - name: ASTRA_DB_TYPE
+      value: "vector"
+    - name: ASTRA_ORG_ID
+      value: "d246feda-e91c-4e62-a0c3-6bc647450366"
+    - name: ASTRA_DB_API_ENDPOINT
+      value: "https://8041aeca-643a-4117-a4d3-092a4ef12b81-us-east-2.apps.astra.datastax.com"
+    - name: ASTRA_DB_APPLICATION_TOKEN
+      value: "${ASTRA_DB_APPLICATION_TOKEN}"
+

@@ -1,0 +1,31 @@
+{
+  "id": "www.incede.ai_baa0f38969",
+  "url": "https://www.incede.ai/services/enterprise-ai-agents",
+  "title": "Enterprise AI Agents | Incede",
+  "timestamp": 1758632979,
+  "text": "Enterprise AI Agents | Incede Home Services Resources Why Incede Let's talk SERVICES OVERVIEW Builds Outcome-Driven AI Incede.ai delivers modular AI services—from intelligent agents and Gen AI strategy to automated workflows and agile planning. We help enterprises streamline operations, boost decision-making, and scale transformation by offering targeted solutions or end-to-end support tailored to your business needs. ENTERPRISE AI AGENTS Prebuilt Agents Custom AI Agent Development GEN AI IMPLEMENTATION AI Roadmapping Private AI AI-Powered Web Agent Custom Model Training AI-POWERED BUSINESS PROCESS AUTOMATION Process Mapping Gen AI + Automation Application Integration PLANNING, BUDGETING AND ANALYTICS Prebuilt Templates Collaborative Forecasting AI-Powered Analytics Let's talk < Enterprise AI Agents Gen AI Implementation AI-Powered Business Process Automation Planning, Budgeting and Analytics > Enterprise AI Agents Our agentic AI agents go beyond simple task execution, they apply business logic, make contextual decisions, and integrate seamlessly with enterprise platforms like Salesforce, SAP, Workday, ServiceNow, Teams, Slack, and can be extended to WhatsApp or other channels through APIs. They also automate everyday tasks such as emails, reports, and document handling, freeing up teams for higher-value work. With IBM watsonx Orchestrate and Multi-Client Protocol (MCP), we design and deploy multi-agent workflows that coordinate action, accelerate outcomes, and scale across business functions. < Prebuilt Agents Custom AI Agent Development > Prebuilt Agents We leverage IBM watsonx Orchestrate’s prebuilt agents across HR, Sales, Procurement, Customer Support & Call Center, IT, Productivity, and Document workflows. These enterprise-ready, customizable agents accelerate deployments, reduce risk, and deliver rapid ROI across industries. Agent Type Use Cases Primary Integrations HR Agents Automate employee support, time-off, onboarding, payroll, and hiring—reducing manual effort. Workday SAP SuccessFactors Get Demo Sales Agents Qualify leads, update CRMs, summarize deals, and prep sellers—shortening sales cycles. Salesforce Seismic HubSpot Get Demo Procurement Agents Manage sourcing, vendors, POs, and contracts—streamlining workflows across procurement platforms. SAP Ariba Coupa Oracle Get Demo Customer Support & Call Center Agents Handle inquiries, manage escalations, and automate workflows across chat, voice, and service channels— boosting CSAT and first-touch resolution. Zendesk Salesforce Service Voice/Chat APIs Get Demo IT Service Agents Automate tickets, user access, and assets—improving efficiency across IT operations. ServiceNow Jira Okta Get Demo Productivity Agents Schedule meetings, manage documents, send updates, and handle lists—within tools your teams already use. Teams Slack Outlook SharePoint Google Workspace Get Demo Document & Collaboration Agents Enable advanced Box/SharePoint tasks like permissions, folders, and comments—all via chat. Box SharePoint OneDrive Get Demo Home Services Resources Why Incede Contact Us 5201 Great America Parkway, Suite #320, Santa Clara, CA 95054 408-850-4900, info@incede.ai Got any questions ? Let's talk © Copyright 2025 incede.ai Cookie Policy Welcome to Incede.ai! In order to provide a more relevant experience for you, we utilize cookies. For more information, please review our Cookies Policy",
+  "links": [
+    "https://www.incede.ai/",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/services/enterprise-ai-agents#enterprise",
+    "https://www.incede.ai/services/gen-ai-implementation#gen",
+    "https://www.incede.ai/services/ai-powered-business-process-automation#ai",
+    "https://www.incede.ai/services/planning-budgeting-and-analytics#planning",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/about/cookie-policy",
+    "https://www.linkedin.com/company/incede-ai",
+    "https://twitter.com/incedeAI",
+    "https://www.youtube.com/channel/UCQwz5MBtdWHuqpoKpU21xRQ",
+    "https://www.incede.ai/about/cookie-policy"
+  ],
+  "page_type": "Services",
+  "reason": "The page provides an overview of the company's AI services, including enterprise AI agents, Gen AI implementation, and AI-powered business process automation, with detailed descriptions of each service and their applications.",
+  "chunking_strategy": "Token + Paragraph Mapping",
+  "reasoning": "This strategy is best for the Services page type because it allows for the preservation of contextual information within paragraphs while also enabling the identification of key concepts and entities through tokenization, which is crucial for understanding the modular AI services and their applications described on the page."
+}

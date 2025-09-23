@@ -1,5 +1,6 @@
 astrapy
-sentence-transformers
+sentence-transformers==2.2.2
+huggingface-hub==0.16.4
 python-dotenv
 requests
 beautifulsoup4
@@ -7,3 +8,4 @@ lxml
 playwright
 fastapi
 uvicorn
+numpy<2.0

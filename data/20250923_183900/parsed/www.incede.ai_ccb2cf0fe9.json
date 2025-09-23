@@ -1,0 +1,31 @@
+{
+  "id": "www.incede.ai_ccb2cf0fe9",
+  "url": "https://www.incede.ai/services/ai-powered-business-process-automation#ai",
+  "title": "AI-Powered Business Process Automation | Incede",
+  "timestamp": 1758633012,
+  "text": "AI-Powered Business Process Automation Incede.ai accelerates enterprise operations by automating high-impact workflows across departments without requiring system overhauls. From approvals to document handling, our intelligent automation integrates with platforms like SAP, Salesforce, Workday, ServiceNow, and other enterprise or home-grown applications. Using GenAI, we go beyond data movement — extracting intent, applying real-time logic, and scaling decisions across the enterprise. Built on IBM Business Automation Workflow, our solutions deliver measurable outcomes through shorter cycles and enterprise-grade compliance. By reducing manual effort, streamlining workflows, and enabling smarter decision-making, clients typically realize 20–40% cost savings. < Process Mapping Gen AI + Automation Application Integration > Process Mapping Incede.ai helps organizations uncover inefficiencies and build a foundation for AI and automation. Through collaborative discovery sessions using IBM Blueworks Live, we map workflows across departments, capturing manual steps, bottlenecks, and delays with precision. Our experts create visual, real-world process blueprints for critical operations like claims, invoicing, and approvals. These models reveal high-impact automation opportunities and serve as an actionable baseline for transformation. You'll receive a prioritized roadmap that aligns stakeholders and accelerates readiness for GenAI and automation, ensuring your investments drive measurable, strategic outcomes.",
+  "links": [
+    "https://www.incede.ai/",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/services/enterprise-ai-agents#enterprise",
+    "https://www.incede.ai/services/gen-ai-implementation#gen",
+    "https://www.incede.ai/services/ai-powered-business-process-automation#ai",
+    "https://www.incede.ai/services/planning-budgeting-and-analytics#planning",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/about/cookie-policy",
+    "https://www.linkedin.com/company/incede-ai",
+    "https://twitter.com/incedeAI",
+    "https://www.youtube.com/channel/UCQwz5MBtdWHuqpoKpU21xRQ",
+    "https://www.incede.ai/about/cookie-policy"
+  ],
+  "page_type": "Services",
+  "reason": "The page text describes specific services offered by the company, such as AI-powered business process automation, process mapping, and application integration, highlighting the benefits and outcomes of these services for clients.",
+  "chunking_strategy": "Token + Paragraph Mapping",
+  "reasoning": "This strategy is best for a Services page with detailed text content because it allows for both granular token-level analysis and paragraph-level understanding, enabling effective capture of key concepts, workflows, and benefits described in the content, such as process automation and AI integration."
+}

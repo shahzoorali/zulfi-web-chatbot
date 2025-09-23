@@ -1,0 +1,31 @@
+{
+  "id": "www.incede.ai_9bdc830881",
+  "url": "https://www.incede.ai/services/gen-ai-implementation#gen",
+  "title": "Gen AI Implementation | Incede",
+  "timestamp": 1758633002,
+  "text": "Gen AI Implementation Incede.ai partners with enterprises to operationalize Generative AI through a full-service lifecycle—starting with readiness assessments, strategic AI roadmapping, and secure model training, through to robust deployment. Our solutions span: private AI for intelligent document understanding; AI-powered website assistants that deliver real-time support without redesign; and advanced implementations of retrieval-augmented generation (RAG), summarization, and classification. Together, these accelerate insight, automation, and decision-making across the enterprise. < AI Roadmapping Private AI AI-Powered Web Agent Custom Foundation Model Training > AI Roadmapping Before launching GenAI initiatives, organizations must evaluate their current state and define a clear path forward. Incede.ai provides an enterprise-grade assessment across data infrastructure, governance, and team capabilities—scoring high-impact use cases using a feasibility-impact framework and aligning them to the IBM watsonx ecosystem. We then build a phased, stakeholder-aligned roadmap including solution architecture, integration points, risk modeling, and GenAI pattern recommendations like RAG or summarization. The final deliverables—a readiness scorecard, use case heatmap, and strategic blueprint—equip you to confidently move from exploration to execution with alignment, prioritization, and speed.",
+  "links": [
+    "https://www.incede.ai/",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/services/enterprise-ai-agents#enterprise",
+    "https://www.incede.ai/services/gen-ai-implementation#gen",
+    "https://www.incede.ai/services/ai-powered-business-process-automation#ai",
+    "https://www.incede.ai/services/planning-budgeting-and-analytics#planning",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/about/cookie-policy",
+    "https://www.linkedin.com/company/incede-ai",
+    "https://twitter.com/incedeAI",
+    "https://www.youtube.com/channel/UCQwz5MBtdWHuqpoKpU21xRQ",
+    "https://www.incede.ai/about/cookie-policy"
+  ],
+  "page_type": "Services",
+  "reason": "The page text describes specific services offered by the company, such as AI implementation, readiness assessments, strategic AI roadmapping, and model training, indicating that it is a services page.",
+  "chunking_strategy": "Token + Paragraph Mapping",
+  "reasoning": "This strategy is best for a Services page with complex, technical content because it allows for both semantic understanding at the paragraph level and granular analysis at the token level, enabling effective capture of key concepts, such as AI solutions and roadmapping, and their relationships."
+}

@@ -1,0 +1,31 @@
+{
+  "id": "www.incede.ai_df1be978c0",
+  "url": "https://www.incede.ai/services/planning-budgeting-and-analytics#planning",
+  "title": "Planning, Budgeting and Analytics | Incede",
+  "timestamp": 1758633017,
+  "text": "Planning, Budgeting and Analytics Incede.ai helps organizations modernize their planning and analytics by unifying data, models, and users into a single ecosystem. We empower teams with collaborative forecasting, dynamic scenario modeling, and real-time insights so they can make faster, smarter decisions. Our solutions combine enterprise-grade planning tools with GenAI-powered analytics assistants that deliver clear, explainable answers in everyday language. From agile budgeting to insight generation, Incede.ai enables business leaders to confidently plan, adapt, and scale with precision, built on IBM’s trusted analytics platforms and tailored to your operational needs. In addition, we build custom dashboards, reports and insights on top of IBM watsonx and Cognos Analytics, enabling explainability, monitoring, and governance of AI models. These dashboards serve as both operational tools and audit trails, ensuring clarity, compliance, and trust. < Prebuilt Planning Templates Collaborative Forecasting & Scenario Modeling AI-Powered Analytics > Prebuilt Planning Templates IBM’s Planning Analytics Core Financial Applications offer prebuilt templates for financial planning, workforce modelling, forecasting, and capital expenditures—delivering a fast, reliable starting point without spreadsheet sprawl. At Incede.ai, we tailor these templates to your KPIs, hierarchies, and operational logic for immediate value and long-term flexibility. Whether planning headcount or simulating supply chain scenarios, we adapt IBM’s tools to your needs and train teams on both web-based workspace and Excel-based environments. The result is a collaborative, real-time, and governed planning system—deployed quickly on IBM infrastructure and optimized by Incede.ai for scale, precision, and faster decision-making.",
+  "links": [
+    "https://www.incede.ai/",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/services/enterprise-ai-agents#enterprise",
+    "https://www.incede.ai/services/gen-ai-implementation#gen",
+    "https://www.incede.ai/services/ai-powered-business-process-automation#ai",
+    "https://www.incede.ai/services/planning-budgeting-and-analytics#planning",
+    "https://www.incede.ai/",
+    "https://www.incede.ai/services/enterprise-ai-agents",
+    "https://www.incede.ai/resources/case-studies",
+    "https://www.incede.ai/why-incede",
+    "https://www.incede.ai/about/cookie-policy",
+    "https://www.linkedin.com/company/incede-ai",
+    "https://twitter.com/incedeAI",
+    "https://www.youtube.com/channel/UCQwz5MBtdWHuqpoKpU21xRQ",
+    "https://www.incede.ai/about/cookie-policy"
+  ],
+  "page_type": "Products",
+  "reason": "The page text describes specific solutions and tools, such as Incede.ai's planning and analytics ecosystem, prebuilt planning templates, and AI-powered analytics assistants, which suggests that it is showcasing the company's products and services, rather than providing general information about the company or its mission.",
+  "chunking_strategy": "Token + Paragraph Mapping",
+  "reasoning": "This strategy is best for a Products page with detailed descriptive content, as it allows for both semantic understanding at the paragraph level and finer-grained analysis at the token level, enabling effective indexing and querying in a vector database."
+}

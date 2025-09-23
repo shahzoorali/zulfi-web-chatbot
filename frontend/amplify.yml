@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+  environment:
+    variables:
+      VITE_API_BASE: 'https://your-apprunner-backend-url.region.awsapprunner.com'
+      VITE_API_KEY: ''
+      VITE_DEFAULT_RUN_ID: ''
+      VITE_TOP_K: '3'
+

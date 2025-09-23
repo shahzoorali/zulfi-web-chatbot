@@ -1,27 +1,50 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState, useEffect } from 'react'
 import { askQuestion } from '../lib/api'
 
 export function Chat(){
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<{role:'user'|'assistant'; text:string}[]>([])
   const [loading, setLoading] = useState(false)
+  const [selectedRunId, setSelectedRunId] = useState<string>('')
+  const [availableRuns, setAvailableRuns] = useState<string[]>([])
   const feedRef = useRef<HTMLDivElement>(null)
 
   const cfg = useMemo(() => ({
     apiBase: import.meta.env.VITE_API_BASE || '',
     apiKey: import.meta.env.VITE_API_KEY || '',
-    runId: import.meta.env.VITE_DEFAULT_RUN_ID || null,
     topK: Number(import.meta.env.VITE_TOP_K || 3)
   }), [])
 
+  // Load available pipeline runs
+  useEffect(() => {
+    const loadRuns = async () => {
+      try {
+        const response = await fetch(`${cfg.apiBase}/pipeline/list`, {
+          headers: cfg.apiKey ? { 'X-API-Key': cfg.apiKey } : {}
+        })
+        if (response.ok) {
+          const data = await response.json()
+          setAvailableRuns(data.pipelines || [])
+          // Auto-select the most recent run if available
+          if (data.pipelines && data.pipelines.length > 0) {
+            setSelectedRunId(data.pipelines[0])
+          }
+        }
+      } catch (err) {
+        console.error('Error loading pipeline runs:', err)
+      }
+    }
+    loadRuns()
+  }, [cfg.apiBase, cfg.apiKey])
+
   async function send(){
     const q = input.trim()
-    if(!q || loading) return
+    if(!q || loading || !selectedRunId) return
     setMessages(m => [...m, {role:'user', text:q}])
     setInput('')
     setLoading(true)
     try{
-      const res = await askQuestion({ apiBase: cfg.apiBase, apiKey: cfg.apiKey, query: q, topK: cfg.topK, runId: cfg.runId })
+      const res = await askQuestion({ apiBase: cfg.apiBase, apiKey: cfg.apiKey, query: q, topK: cfg.topK, runId: selectedRunId })
       setMessages(m => [...m, {role:'assistant', text: res.answer || 'No answer.'}])
       if(Array.isArray(res.sources) && res.sources.length){
         const src = res.sources.map((s:any) => `• ${s.title || s.url || ''}`).join('\n')
@@ -37,6 +60,34 @@ export function Chat(){
 
   return (
     <div className="chat">
+      {messages.length === 0 && (
+        <div className="chat-welcome">
+          <h3>Welcome to the Chatbot!</h3>
+          <p>Ask questions about the knowledge base. Make sure to run a pipeline first in the "Knowledge Base" tab to set up the database.</p>
+          
+          {availableRuns.length > 0 && (
+            <div className="run-selector">
+              <label htmlFor="runSelect">Select Pipeline Run:</label>
+              <select 
+                id="runSelect"
+                value={selectedRunId} 
+                onChange={(e) => setSelectedRunId(e.target.value)}
+                className="run-select"
+              >
+                {availableRuns.map(runId => (
+                  <option key={runId} value={runId}>{runId}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          
+          {availableRuns.length === 0 && (
+            <div className="no-runs">
+              <p>⚠️ No pipeline runs found. Please run a pipeline first in the "Knowledge Base" tab.</p>
+            </div>
+          )}
+        </div>
+      )}
       <div className="feed" ref={feedRef}>
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.role}`}>

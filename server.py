@@ -104,6 +104,8 @@ class PipelineStatus(BaseModel):
     logs: list[str]
     start_time: Optional[str] = None
     end_time: Optional[str] = None
+    site_name: Optional[str] = None
+    start_url: Optional[str] = None
 
 # Global pipeline status tracking
 pipeline_status: Dict[str, PipelineStatus] = {}
@@ -123,7 +125,9 @@ def save_pipeline_history():
                 "progress": status.progress,
                 "logs": status.logs,
                 "start_time": status.start_time,
-                "end_time": status.end_time
+                "end_time": status.end_time,
+                "site_name": status.site_name,
+                "start_url": status.start_url
             }
         
         with open(PIPELINE_HISTORY_FILE, 'w') as f:
@@ -148,7 +152,9 @@ def load_pipeline_history():
                     progress=data["progress"],
                     logs=data["logs"],
                     start_time=data.get("start_time"),
-                    end_time=data.get("end_time")
+                    end_time=data.get("end_time"),
+                    site_name=data.get("site_name"),
+                    start_url=data.get("start_url")
                 )
             print(f"✅ Pipeline history loaded from {PIPELINE_HISTORY_FILE} ({len(pipeline_status)} runs)")
         else:
@@ -164,19 +170,23 @@ def load_pipeline_history():
 async def run_pipeline_background(run_id: str, start_url: str, max_depth: int, max_pages: int):
     """Run the pipeline in the background and update status."""
     try:
+        # Extract site name from URL
+        from urllib.parse import urlparse
+        parsed_url = urlparse(start_url)
+        site_name = parsed_url.netloc or start_url
+        
         pipeline_status[run_id] = PipelineStatus(
             run_id=run_id,
             status="running",
             progress={"step": "starting", "current_step": 0, "total_steps": 3},
             logs=["Pipeline started"],
-            start_time=time.strftime("%Y-%m-%d %H:%M:%S")
+            start_time=time.strftime("%Y-%m-%d %H:%M:%S"),
+            site_name=site_name,
+            start_url=start_url
         )
         save_pipeline_history()  # Save initial status
         
         # Add initial setup information (like run_all.py does)
-        from urllib.parse import urlparse
-        parsed_url = urlparse(start_url)
-        site_name = parsed_url.netloc or start_url
         os.environ["SITE_NAME"] = site_name
         
         pipeline_status[run_id].logs.append(f"🚀 Starting pipeline | run_id: {run_id}")
@@ -372,7 +382,7 @@ def get_pipeline_status(run_id: str, x_api_key: Optional[str] = Header(default=N
 
 @app.get("/pipeline/list")
 def list_pipelines(x_api_key: Optional[str] = Header(default=None)):
-    """List all pipeline runs."""
+    """List all pipeline runs with basic info."""
     # optional auth
     if API_KEY and x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -391,6 +401,30 @@ def list_pipelines(x_api_key: Optional[str] = Header(default=None)):
                     run_ids.add(extracted_run_id)
     
     return {"pipelines": sorted(list(run_ids), reverse=True)}
+
+@app.get("/pipeline/history")
+def get_pipeline_history(x_api_key: Optional[str] = Header(default=None)):
+    """Get detailed pipeline history with site names and timestamps."""
+    # optional auth
+    if API_KEY and x_api_key != API_KEY:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    # Return detailed pipeline information
+    history = []
+    for run_id, status in pipeline_status.items():
+        history.append({
+            "run_id": status.run_id,
+            "status": status.status,
+            "site_name": status.site_name or "Unknown",
+            "start_url": status.start_url or "",
+            "start_time": status.start_time,
+            "end_time": status.end_time
+        })
+    
+    # Sort by run_id (most recent first)
+    history.sort(key=lambda x: x["run_id"], reverse=True)
+    
+    return {"history": history}
 
 @app.delete("/pipeline/{run_id}")
 def delete_pipeline(run_id: str, x_api_key: Optional[str] = Header(default=None)):

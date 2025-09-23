@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import { startPipeline, getPipelineStatus, listPipelines, deletePipeline, getServerStatus, ServerStatus, testChatbot } from '../lib/api'
+import { startPipeline, getPipelineStatus, listPipelines, deletePipeline, getServerStatus, ServerStatus, testChatbot, getPipelineHistory, PipelineHistoryItem } from '../lib/api'
 
 interface PipelineProgress {
   step: string
@@ -14,6 +14,8 @@ interface PipelineStatus {
   logs: string[]
   start_time?: string
   end_time?: string
+  site_name?: string
+  start_url?: string
 }
 
 // Detailed step information for verbose display
@@ -31,6 +33,7 @@ export function Pipeline() {
   const [currentRunId, setCurrentRunId] = useState<string | null>(null)
   const [status, setStatus] = useState<PipelineStatus | null>(null)
   const [pipelines, setPipelines] = useState<string[]>([])
+  const [pipelineHistory, setPipelineHistory] = useState<PipelineHistoryItem[]>([])
   const [selectedPipeline, setSelectedPipeline] = useState<string>('')
   const [error, setError] = useState<string>('')
   const [verboseMode, setVerboseMode] = useState(true)
@@ -49,6 +52,7 @@ export function Pipeline() {
   // Load existing pipelines and server status
   useEffect(() => {
     loadPipelines()
+    loadPipelineHistory()
     loadServerStatus()
   }, [])
 
@@ -98,6 +102,7 @@ export function Pipeline() {
           if (pipelineStatus.status === 'completed' || pipelineStatus.status === 'failed') {
             setIsRunning(false)
             loadPipelines() // Refresh pipeline list
+            loadPipelineHistory() // Refresh pipeline history
           }
         } catch (err) {
           console.error('Error checking status:', err)
@@ -133,6 +138,17 @@ export function Pipeline() {
     } catch (err) {
       console.error('Error loading pipelines:', err)
       setPipelines([]) // Set empty array on error
+    }
+  }
+
+  const loadPipelineHistory = async () => {
+    try {
+      const result = await getPipelineHistory(cfg.apiBase, cfg.apiKey)
+      // Defensive programming: ensure history is always an array
+      setPipelineHistory(Array.isArray(result?.history) ? result.history : [])
+    } catch (err) {
+      console.error('Error loading pipeline history:', err)
+      setPipelineHistory([]) // Set empty array on error
     }
   }
 
@@ -192,6 +208,7 @@ export function Pipeline() {
     try {
       await deletePipeline(cfg.apiBase, runId, cfg.apiKey)
       loadPipelines()
+      loadPipelineHistory()
       if (currentRunId === runId) {
         setCurrentRunId(null)
         setStatus(null)
@@ -218,6 +235,34 @@ export function Pipeline() {
     if (stepNum < current) return 'completed'
     if (stepNum === current) return 'running'
     return 'pending'
+  }
+
+  const formatTimestamp = (timestamp?: string) => {
+    if (!timestamp) return 'Unknown'
+    try {
+      const date = new Date(timestamp)
+      return date.toLocaleString()
+    } catch {
+      return timestamp
+    }
+  }
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'completed': return '✅'
+      case 'running': return '🔄'
+      case 'failed': return '❌'
+      default: return '❓'
+    }
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return '#28a745'
+      case 'running': return '#007bff'
+      case 'failed': return '#dc3545'
+      default: return '#6c757d'
+    }
   }
 
   const formatLogEntry = (log: string) => {
@@ -495,19 +540,43 @@ export function Pipeline() {
 
       <div className="pipeline-history">
         <h3>Pipeline History</h3>
-        {pipelines.length === 0 ? (
+        {pipelineHistory.length === 0 ? (
           <p>No pipelines found</p>
         ) : (
           <div className="pipeline-list">
-            {pipelines.map((runId) => (
-              <div key={runId} className="pipeline-item">
-                <span className="run-id">{runId}</span>
+            {pipelineHistory.map((item) => (
+              <div key={item.run_id} className="pipeline-item">
+                <div className="pipeline-info">
+                  <div className="pipeline-header">
+                    <span className="status-icon">{getStatusIcon(item.status)}</span>
+                    <span className="run-id">{item.run_id}</span>
+                    <span 
+                      className="status-badge" 
+                      style={{ backgroundColor: getStatusColor(item.status) }}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
+                  <div className="pipeline-details">
+                    <div className="site-name">
+                      <strong>{item.site_name}</strong>
+                    </div>
+                    <div className="timestamp">
+                      Started: {formatTimestamp(item.start_time)}
+                    </div>
+                    {item.end_time && (
+                      <div className="timestamp">
+                        Ended: {formatTimestamp(item.end_time)}
+                      </div>
+                    )}
+                  </div>
+                </div>
                 <div className="pipeline-actions">
-                  <button onClick={() => handleViewPipeline(runId)}>
+                  <button onClick={() => handleViewPipeline(item.run_id)}>
                     View
                   </button>
                   <button 
-                    onClick={() => handleDeletePipeline(runId)}
+                    onClick={() => handleDeletePipeline(item.run_id)}
                     className="delete-button"
                   >
                     Delete

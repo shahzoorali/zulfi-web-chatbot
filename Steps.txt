@@ -1,0 +1,29 @@
+playwright
+beautifulsoup4
+python-dotenv
+rich
+faiss-cpu
+sentence-transformers
+requests
+
+In CMD -
+cd website-chatbot (the path where this folder is saved, example if its on your desktop then command is'cd C:\Users\Admin\Desktop\website-chatbot')
+py -3.11 -m venv .venv
+.\.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python -m playwright install chromium
+
+once everything is installed
+
+python run_all.py <START_URL> <MAX_DEPTH> <MAX_PAGES>
+
+User can enter any URL, required Depth and Pages
+
+
+or
+- click on setup.bat and wait for everything to be installed
+Then in CMD
+1)cd (path where the folder was extracted)\website-chatbot
+2).\.venv\Scripts\activate
+3) python run_all.py <START_URL> <MAX_DEPTH> <MAX_PAGES>

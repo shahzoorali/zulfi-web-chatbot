@@ -1,0 +1,9 @@
+astrapy
+sentence-transformers
+python-dotenv
+requests
+beautifulsoup4
+lxml
+playwright
+fastapi
+uvicorn

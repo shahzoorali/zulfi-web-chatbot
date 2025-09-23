@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { startPipeline, getPipelineStatus, listPipelines, deletePipeline, getServerStatus, ServerStatus, testChatbot } from '../lib/api'
 
 interface PipelineProgress {
@@ -39,6 +39,7 @@ export function Pipeline() {
   const [testQuery, setTestQuery] = useState('who are you?')
   const [testResult, setTestResult] = useState<{answer: string, sources: any[]} | null>(null)
   const [testingChat, setTestingChat] = useState(false)
+  const isStartingRef = useRef(false)
 
   const cfg = useMemo(() => ({
     apiBase: import.meta.env.VITE_API_BASE || '',
@@ -141,6 +142,12 @@ export function Pipeline() {
       return
     }
 
+    // Prevent multiple simultaneous starts using ref
+    if (isStartingRef.current || isRunning) {
+      return
+    }
+
+    isStartingRef.current = true
     setError('')
     setIsRunning(true)
     
@@ -163,6 +170,8 @@ export function Pipeline() {
     } catch (err) {
       setIsRunning(false)
       setError(`Error starting pipeline: ${err}`)
+    } finally {
+      isStartingRef.current = false
     }
   }
 

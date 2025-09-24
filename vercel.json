@@ -39,11 +39,6 @@
       "dest": "/frontend/$1"
     }
   ],
-  "functions": {
-    "api/index.py": {
-      "runtime": "python3.9"
-    }
-  },
   "env": {
     "IBM_API_KEY": "@ibm_api_key",
     "WATSONX_PROJECT_ID": "@watsonx_project_id",

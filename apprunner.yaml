@@ -1,16 +1,15 @@
 version: 1.0
-runtime: python3.11
+runtime: python3.10
 build:
   commands:
-    build:
-      - echo "Installing dependencies..."
-      - python3 -m pip install --upgrade pip
-      - python3 -m pip install -r requirements.txt
-      - echo "Installing Playwright browsers..."
-      - python3 -m playwright install chromium
-      - echo "Build completed"
+    - echo "Installing dependencies..."
+    - python3 -m pip install --upgrade pip
+    - python3 -m pip install -r requirements.txt
+    - echo "Installing Playwright browsers..."
+    - python3 -m playwright install chromium
+    - echo "Build completed"
 run:
-  runtime-version: 3.11
+  runtime-version: 3.10
   command: python3 -m uvicorn server:app --host 0.0.0.0 --port 8000
   network:
     port: 8000

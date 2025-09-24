@@ -1,0 +1,64 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/answer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/pipeline/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/status",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chat/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ],
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.9"
+    }
+  },
+  "env": {
+    "IBM_API_KEY": "@ibm_api_key",
+    "WATSONX_PROJECT_ID": "@watsonx_project_id",
+    "WATSONX_URL": "https://ca-tor.ml.cloud.ibm.com",
+    "WATSONX_MODEL_ID": "meta-llama/llama-3-3-70b-instruct",
+    "ASTRA_COLLECTION_NAME": "chatbot_chunks",
+    "ASTRA_KEYSPACE": "default_keyspace",
+    "EMBED_MODEL": "sentence-transformers/all-mpnet-base-v2",
+    "ASTRA_DEVOPS_TOKEN": "@astra_devops_token",
+    "ASTRA_REGION": "us-east-2",
+    "ASTRA_CLOUD": "AWS",
+    "ASTRA_TIER": "serverless",
+    "ASTRA_DB_TYPE": "vector",
+    "ASTRA_ORG_ID": "d246feda-e91c-4e62-a0c3-6bc647450366",
+    "ASTRA_DB_API_ENDPOINT": "https://8041aeca-643a-4117-a4d3-092a4ef12b81-us-east-2.apps.astra.datastax.com",
+    "ASTRA_DB_APPLICATION_TOKEN": "@astra_db_application_token"
+  }
+}

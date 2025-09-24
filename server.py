@@ -10,7 +10,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Header
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -83,6 +84,9 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
     allow_headers=["*"]
 )
+
+# Mount static files (React frontend assets)
+app.mount("/assets", StaticFiles(directory="frontend/dist/assets"), name="assets")
 
 # ─────────────────────────────────────────────
 # Models
@@ -531,6 +535,21 @@ def test_chatbot(req: AnswerRequest, x_api_key: Optional[str] = Header(default=N
         
     except Exception as e:
         return {"answer": f"Error processing query: {str(e)}", "sources": []}
+
+# Serve React app for all non-API routes (SPA routing)
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str):
+    """
+    Catch-all route to serve React app for client-side routing.
+    This ensures React Router works properly for all frontend routes.
+    """
+    # Skip if it's an API route or static asset
+    if (full_path.startswith(("api/", "answer", "pipeline", "status", "chat", "assets")) or 
+        full_path.endswith((".js", ".css", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".svg"))):
+        raise HTTPException(status_code=404, detail="Not found")
+    
+    # Serve index.html for all other routes (React Router)
+    return FileResponse("frontend/dist/index.html")
 
 if __name__ == "__main__":
     import uvicorn
